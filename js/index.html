@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <form method="POST" action="" name="search_form">
+        <div class="input-group">
+            <input type="text" class="form-control" name="test" value="test" id='text' placeholder="Donner votre un message" /><br />
+        </div>
+        <div class="input-group">
+            <input type="text" class="form-control" name="number" value="5" id='number' placeholder="Nombre d'occurance" /><br />
+            <div class="invalid-feedback">
+                doit être un nombre positif
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="b" name="style">
+                <label class="form-check-label">
+                    <b>Gras</b>
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="i" name="style">
+                <label class="form-check-label">
+                    <i>Italique</i>
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="u" name="style">
+                <label class="form-check-label">
+                    <u>Souligné</u>
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button type="button" class="btn w-100 btn-success" onclick="bonjour()" name="button" id='searchBtn'>Submit</button>
+            </div>
+            <div class="col">
+                <button type="reset" class="btn w-100 btn-danger" name="button">reset</button>
+            </div>
+        </div>
+    </form>
+    <div id="resultat" class="resultat"></div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        function bonjour() {
+
+            var styleList = document.querySelectorAll("input[name='style']")
+
+            var start = ''
+            var end = ''
+
+            styleList.forEach((element) => {
+                if (element.checked) {
+                    start += '<'+element.value+'>'
+                    end = '</'+element.value+'>' + end
+                }
+            })
+
+
+            console.log(start, end);
+
+            var n = document.getElementById('number').value
+            if (isNaN(n)) {
+                document.getElementById('number').classList.add('is-invalid')
+                document.getElementById('resultat').innerHTML = "Erreur"
+            } else {
+                var text = document.getElementById('text').value
+                var message = '<ol>'
+                for (var i = 0; i < n; i++) {
+                    message += '<li>' + start + text + end +'</li>'
+                }
+                message += '</ol>'
+                document.getElementById('resultat').innerHTML = message
+            }
+        }
+    </script>
+</body>
+
+</html>
