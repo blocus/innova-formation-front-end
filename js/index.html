@@ -9,70 +9,102 @@
 </head>
 
 <body>
-    <form method="POST" action="" name="search_form">
-        <div class="input-group">
-            <input type="text" class="form-control" name="test" value="test" id='text' placeholder="Donner votre un message" /><br />
-        </div>
-        <div class="input-group">
-            <input type="text" class="form-control" name="number" value="5" id='number' placeholder="Nombre d'occurance" /><br />
-            <div class="invalid-feedback">
-                doit être un nombre positif
+    <div class="container">
+        <form method="POST" action="" name="search_form">
+            <div class="form-group">
+                <label for="text">Nom et prénom</label>
+                <input type="text" class="form-control" id="text" name="test" value="Ahmed Meftah" placeholder="Donner votre un message">
             </div>
-        </div>
+            <div class="input-group">
+                <label for="text"></label>
+            </div>
+            <div class="form-group">
+                <label for="number">Nombre</label>
+                <input type="text" class="form-control" name="number" value="5" id='number' placeholder="Nombre d'occurance" />
+                <div class="invalid-feedback">
+                    doit être un nombre positif
+                </div>
+            </div>
 
 
-        <div class="form-group">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="b" name="style">
-                <label class="form-check-label">
-                    <b>Gras</b>
-                </label>
+            <div class="form-check form-check-inline">
+                <b>Sexe : </b>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="M" name="sexe">
+                    <label class="form-check-label">
+                        Male
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" value="F" name="sexe">
+                    <label class="form-check-label">
+                        Female
+                    </label>
+                </div>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="i" name="style">
-                <label class="form-check-label">
-                    <i>Italique</i>
-                </label>
+            <br />
+            <div class="form-check form-check-inline">
+                <b>Style : </b>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="b" name="style">
+                    <label class="form-check-label">
+                        <b>Gras</b>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="i" name="style">
+                    <label class="form-check-label">
+                        <i>Italique</i>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="u" name="style">
+                    <label class="form-check-label">
+                        <u>Souligné</u>
+                    </label>
+                </div>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="u" name="style">
-                <label class="form-check-label">
-                    <u>Souligné</u>
-                </label>
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn w-100 btn-success" onclick="bonjour()" name="button" id='searchBtn'>Submit</button>
+                </div>
+                <div class="col">
+                    <button type="reset" class="btn w-100 btn-danger" name="button">reset</button>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <button type="button" class="btn w-100 btn-success" onclick="bonjour()" name="button" id='searchBtn'>Submit</button>
-            </div>
-            <div class="col">
-                <button type="reset" class="btn w-100 btn-danger" name="button">reset</button>
-            </div>
-        </div>
-    </form>
-    <div id="resultat" class="resultat"></div>
+        </form>
+        <div id="resultat" class="resultat"></div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="./language.js"></script>
 
     <script type="text/javascript">
+        var l = 'fr'
+        var lang = language[l]
         function bonjour() {
 
             var styleList = document.querySelectorAll("input[name='style']")
-
             var start = ''
             var end = ''
-
+            var prefix = lang.helloMessageM
             styleList.forEach((element) => {
                 if (element.checked) {
-                    start += '<'+element.value+'>'
-                    end = '</'+element.value+'>' + end
+                    start += '<' + element.value + '>'
+                    end = '</' + element.value + '>' + end
                 }
             })
 
-
-            console.log(start, end);
+            document.search_form.sexe.forEach(e => {
+                if(e.checked && e.value === 'M'){
+                    prefix = lang.helloMessageM
+                } else if(e.checked && e.value === 'F'){
+                    prefix = lang.helloMessageF
+                }
+            })
 
             var n = document.getElementById('number').value
             if (isNaN(n)) {
@@ -82,7 +114,7 @@
                 var text = document.getElementById('text').value
                 var message = '<ol>'
                 for (var i = 0; i < n; i++) {
-                    message += '<li>' + start + text + end +'</li>'
+                    message += '<li>' + start + prefix + text + end + '</li>'
                 }
                 message += '</ol>'
                 document.getElementById('resultat').innerHTML = message
