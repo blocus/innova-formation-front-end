@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <form name='presence_form' >
+            <input type="text" name="first" value="" placeholder="Prénon : "><br />
+            <input type="text" name="last" value="" placeholder="Nom : "><br />
+            <input type="radio" name="sexe" value="H"> Homme
+            <input type="radio" name="sexe" value="F"> Femme
+            <br />
+            <button type="button" onclick="presence()" name="submit">Présent</button>
+            <button type="button" onclick="resetpresence()" name="submit">Effacer</button>
+        </form>
+        <ul id="result">
+        </ul>
+
+        <script type="text/javascript" src='Eleve.js'></script>
+        <script type="text/javascript">
+            var classe = []
+            function presence() {
+                first = document.presence_form.first.value
+                last = document.presence_form.last.value
+                sexe = document.presence_form.sexe.value
+                classe.push(new Eleve(first, last, sexe))
+                document.presence_form.first.value = ""
+                document.presence_form.last.value = ""
+                refresh()
+            }
+
+            function resetpresence(){
+                classe = []
+                refresh()
+            }
+
+            function refresh(){
+                let message = ""
+                if(classe.length === 0){
+                    message = 'Aucun élève'
+                } else{
+                    classe.map(element => {
+                        message += "<li>" + element.hello() + "</li>"
+                    })
+                }
+                document.getElementById('result').innerHTML = message
+            }
+        </script>
+    </body>
+</html>
