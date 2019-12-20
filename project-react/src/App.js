@@ -1,59 +1,22 @@
 import React, { Component } from 'react';
-import Header from "./components/Header"
-// import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Home from "./views/Home"
+import Login from "./views/Login"
+import Register from "./views/Register"
 
 
 class App extends Component {
-    constructor(props) {
-        super(props);
-        console.log(this.props);
-        this.state = {
-            favoritecolor: "red",
-            users : [],
-        };
-    }
-
-
-    componentDidMount(){
-        this.setState({
-            users : ['user1' , 'user2' , 'user3' , 'user4' , ]
-        })
-    }
-
-    componentDidUpdate(prevProps, prevState){
-        if(this.state.name !==  prevProps.name){
-            this.setState({
-                name : prevProps.name
-            })
-        }
-    }
-
-    renderContaner(){
-        return(
-            <div className="container">
-            {this.state.users.map((e, k) => {
-                return(<li key={k}>{e}</li>)
-            })}
-            </div>
-        )
-    }
-
-    adduser(){
-        let tmp = this.state.users.slice()
-        tmp.push("user" + (tmp.length +1) )
-        this.setState({
-            users : tmp
-        })
-    }
-
     render(){
         return(
-            <>
-                <Header />
-                {this.renderContaner()}
-                <button onClick={() => this.adduser()}>Add New</button>
-                <div className="footer"></div>
-            </>
+            <Router>
+                <Switch>
+                    <Route path='/login' exact strict component={Login} />
+                    <Route path='/forgot-password' exact strict component={Register} />
+                    <Route path='/register' exact strict component={Register} />
+                    <Route path='/register/:token' exact strict component={Register} />
+                    <Route path='/' component={Home} />
+                </Switch>
+            </Router>
         )
     }
 }
