@@ -12,6 +12,7 @@ class Header extends Component {
                 <Nav className="mr-auto">
                     <Link className="nav-link" to="/">Home</Link>
                     <Link className="nav-link" to="/catalog">Catalog</Link>
+                    <Link className="nav-link" to="/blog">Blog</Link>
                     <Link className="nav-link" to="/contact">Contact</Link>
                 </Nav>
                 <Login />

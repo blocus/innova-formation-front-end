@@ -12,11 +12,10 @@ class CardProduct extends Component {
     }
 
     render(){
-        console.log(this.state);
         return(
             <div className="col-4">
                 <h3>{this.state.name}</h3>
-                <img src={this.state.img} />
+                <img src={this.state.img} alt={this.state.name} className="w-100" />
                 <span className="prix" >{this.state.prix} $</span>
             </div>
         )
