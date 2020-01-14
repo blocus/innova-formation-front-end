@@ -46,7 +46,6 @@ class Books extends Component {
       return (
         <div>
           {this.state.bookList.map((book, key) => {
-            // console.log(book);
             return (
               <div key={key}>
                 <h3>{book.ID}</h3>
