@@ -11,9 +11,6 @@ class Catalog extends Component {
     }
 
     componentDidMount(){
-        
-
-
         this.setState({
             cataloglist : data,
         })
@@ -26,7 +23,13 @@ class Catalog extends Component {
                 <div className="row">
                     {
                         this.state.cataloglist.map((e, k) => {
-                            return (<CardProduct key={k} item={e}/>)
+                            return (
+                                <CardProduct key={k} >
+                                    <img src={e.img} alt={e.alt} />
+                                    <h3>{e.title}</h3>
+                                    <p>{e.subtitle}</p>
+                                </CardProduct>
+                            )
                         })
                     }
                 </div>

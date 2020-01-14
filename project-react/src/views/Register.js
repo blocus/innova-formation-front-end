@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 
 class Register extends Component {
-
-
     render(){
-        console.log(this.props);
+        console.log(this);
         return (
             <>
                 <h1>Register</h1>
@@ -12,7 +10,6 @@ class Register extends Component {
             </>
         )
     }
-
 }
 
 export default Register;
